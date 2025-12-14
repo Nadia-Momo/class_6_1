@@ -1,5 +1,7 @@
 
 const User = require("../models/useSchema");
+const { generateAccessToken } = require("../utils/tokens");
+
 const { isValidEmail } = require("../utils/validation");
 
 const signUp = async (req, res) => {
@@ -40,7 +42,8 @@ console.log("Password Match?:", match); // <-- Debugging
   if (!match) {
     return res.status(400).send({ message: "Incorrect password" });
   }
-
+const token=generateAccessToken({ id:existingUser._id,email:existingUser.email })
+res.cookie("acc_token",token)
   res.status(200).send({ message: "Login successful" });
 };
 module.exports = { signUp, login };

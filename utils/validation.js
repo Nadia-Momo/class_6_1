@@ -15,6 +15,4 @@ function isValidUrl(string) {
   );
   return pattern.test(string);
 }
-
-
 module.exports={isValidEmail,isValidUrl}
